@@ -1,0 +1,45 @@
+# ================================================================
+# SECURITATE MAXIMA - Blocheaza ORICE acces direct la fisiere uploadate
+# Fisierele sunt servite exclusiv prin download.php
+# ================================================================
+
+# Blocheaza TOTUL
+Order Allow,Deny
+Deny from all
+
+# Nu afisa listing
+Options -Indexes
+
+# Dezactiveaza PHP complet in acest director
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+# Dezactiveaza CGI
+Options -ExecCGI
+
+# Blocheaza toate handler-ele PHP
+<IfModule mod_handlers.c>
+    RemoveHandler .php .php3 .php4 .php5 .php7 .php8 .phtml .phar .asp .aspx .cgi .pl .py
+</IfModule>
+
+AddHandler cgi-script .php .php3 .php4 .php5 .php7 .php8 .phtml .phar .asp .aspx .cgi .pl .py .sh .rb
+
+# Forteaza content type neutru pentru orice fisier
+<IfModule mod_mime.c>
+    ForceType application/octet-stream
+</IfModule>
+
+# Header suplimentar anti-sniff
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Content-Disposition "attachment"
+</IfModule>
