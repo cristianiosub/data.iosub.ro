@@ -1,9 +1,13 @@
 # Configuration
 config.php
 *.sql
+settings.php
+*.env
 
 # Log files
 *.log
+/logs/
+/log/
 
 # htaccess
 /.htaccess
@@ -13,3 +17,4 @@ config.php
 *.csv
 *.docx
 *.doc
+/storage/
